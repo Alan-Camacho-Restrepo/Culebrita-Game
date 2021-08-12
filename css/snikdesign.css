@@ -1,0 +1,9 @@
+.area_juego{
+    width: 90%;
+    height: 90%;
+    border:3px solid #fa3;
+}
+
+.container{
+    text-align: center;
+}
