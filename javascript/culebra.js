@@ -22,10 +22,22 @@ function mover(color,x,y){
 
 let xi = aleatorio(0,area.width);
 let yi = aleatorio(0,area.height);
-let color = 'green';
+let color = 'black';
+
+let xci = aleatorio(0,area.width);
+let yci = aleatorio(0,area.height);
 
 document.addEventListener('keydown',mover_culebra);
 window.addEventListener('load',poner_incio);
+window.addEventListener('load',comida_inicial);
+
+
+function comida_inicial(){
+
+    var color = 'green';
+    punto.fillStyle = color;
+    punto.fillRect(xci,yci,3,3);
+}
 
 function poner_incio(){
     punto.fillStyle = color;
@@ -36,30 +48,54 @@ function poner_incio(){
 
 function mover_culebra(evento){
 
-    let paso = 3;
+    let paso = 1;
 
     switch(evento.keyCode){
 
         case teclas.UP:
+       
 
-            punto.clearRect(xi-0.1,yi-0.1,3.2,3.2); 
+            if((xci-3 < xi < xci+3) && (yci-3 < yi < yci+3) && (xi != xci && yi != yci)){
+                comida_inicial();
+            }
+
+            punto.clearRect(xi-0.1,yi-0.1,3.2,3.2);
             yi = yi - paso;
             mover(color,xi,yi);   
             break;
         
         case teclas.DOWN:
+
+            if((xci-3 < xi < xci+3) && (yci-3 < yi < yci+3)){
+                comida_inicial();
+                if((xi == xci && yi == yci)){
+                    punto.clearRect(xci-0.1,yci-0.1,3.2,3.2);
+                }
+                
+            }
+
             punto.clearRect(xi-0.1,yi-0.1,3.2,3.2);  
             yi = yi + paso;
             mover(color,xi,yi);
             break;
 
         case teclas.LEFT:
+
+            if((xci-3 < xi < xci+3) && (yci-3 < yi < yci+3) && (xi != xci && yi != yci)){
+                comida_inicial();
+            }
+
             punto.clearRect(xi-0.1,yi-0.1,3.2,3.2); 
             xi = xi - paso;
             mover(color,xi,yi);
             break;
         
         case teclas.RIGHT:
+
+            if((xci-3 < xi < xci+3) && (yci-3 < yi < yci+3) && (xi != xci && yi != yci)){
+                comida_inicial();
+            }
+
             punto.clearRect(xi-0.1,yi-0.1,3.2,3.2);  
             xi = xi + paso;
             mover(color,xi,yi);
